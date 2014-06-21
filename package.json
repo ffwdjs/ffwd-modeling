@@ -1,0 +1,57 @@
+{
+  "private": true,
+  "name": "ffwd-modeling",
+  "version": "0.0.1",
+  "description": "A modeling utility toolbelt for FFWD",
+  "main": "client/scripts/index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha -b --recursive test/server/*Spec.js",
+    "watched-test": "./node_modules/mocha/bin/mocha -r Spec -w --recursive test/server/*Spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zeropaper/ffwd-modeling.git"
+  },
+  "keywords": [
+    "ffwdfeature",
+    "modeling",
+    "persistence",
+    "FFWD"
+  ],
+  "author": "Valentin Vago <zeropaper@irata.ch>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeropaper/ffwd-modeling/issues"
+  },
+  "homepage": "https://github.com/zeropaper/ffwd-modeling",
+  "dependencies": {
+    "amdefine": "^0.1.0",
+    "backbone": "^1.1.2",
+    "backbone.localstorage": "^1.1.7",
+    "sequelize": "^1.7.5",
+    "underscore": "^1.6.0",
+    "validator": "^3.12.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "expect.js": "^0.3.1",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "time-grunt": "^0.3.1",
+    "load-grunt-tasks": "^0.4.0",
+    "grunt": "^0.4.4",
+    "grunt-newer": "^0.7.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-jsdoc": "^0.5.4",
+    "underscore": "^1.6.0",
+    "backbone": "^1.1.2",
+    "jquery": "^2.1.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-express": "^1.3.5"
+  },
+  "browser": "./client/scripts",
+  "optionalDependencies": {
+    "mysql": "^2.3.0",
+    "sequelize-mysql": "^1.7.0"
+  }
+}

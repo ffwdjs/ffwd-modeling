@@ -1,0 +1,21 @@
+{
+  "globals": {
+    "it": false,
+    "xit": false,
+    "console": false,
+    "describe": false,
+    "xdescribe": false,
+    "expect": false,
+    "beforeEach": false,
+    "before": false,
+    "afterEach": false,
+    "after": false,
+    "require": false
+  },
+
+  "node" : true,
+  "browser" : true,
+
+  "strict": true,
+  "white": true
+}
