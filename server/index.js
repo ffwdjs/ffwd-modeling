@@ -319,9 +319,10 @@ function deliverHAL(res) {
  * 
  */
 function sendOverride(res) {
-  var originalSend = res.send;
+  var send = res.originalSend = res.send;
   var req = res.req;
   var next = req.next;
+
 
   return function(smth) {
     if (arguments.length > 1) {
@@ -334,7 +335,7 @@ function sendOverride(res) {
     }
 
     if (!isInstance(smth) && !isCollection(smth)) {
-      return originalSend.apply(this, arguments);
+      return send.apply(this, arguments);
     }
 
     var accept = req.accepts([
@@ -363,7 +364,7 @@ function sendOverride(res) {
       //   res.locals.body = body;
       //   break;
       default:
-        originalSend.apply(this, arguments);
+        send.apply(this, arguments);
     }
   };
 }
@@ -375,15 +376,16 @@ function sendOverride(res) {
  * 
  */
 function allRequestsCallback(req, res, next) {
+  res.req = req;
   res.deliverJSON = deliverJSON(res);
 
   res.deliverHAL = deliverHAL(res);
 
+  // console.info('res', Object.keys(res));
   res.send = sendOverride(res);
   
   next();
 }
-
 
 
 
@@ -418,6 +420,7 @@ module.exports = function(settings) {
 
     if (!connectionURI) {
       connectionURI = require(path.join(process.cwd(), '.db-setup.json'))[settings.environement];
+      // console.info('connectionURI from .db-setup.json', settings.environement, connectionURI);
     }
 
     if (!connectionURI) {
@@ -436,6 +439,7 @@ module.exports = function(settings) {
 
   function modeling(name) {
     if (!_models[name]) {
+      // console.trace('model name', [[name]]);
       throw new Error('the model "'+ name +'" does not exists');
     }
     return _models[name];
@@ -456,7 +460,7 @@ module.exports = function(settings) {
   modeling.request = function(req, res, next) {
     if (_appDbSync) {
       _appDbSync = false;
-      return sequelize.sync()
+      sequelize.sync()
         .then(function() {
           allRequestsCallback(req, res, next);
         }, next);
