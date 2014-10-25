@@ -1,4 +1,4 @@
 ffwd-utils
 ==========
 
-A authentication utility toolbelt for FFWD
+A data modeling and persitence set of tools for FFWD
